@@ -104,7 +104,7 @@ function printCoins(data) {
         $(coinCard).append(toggleSelect);
         $(coinCard).append(buttonMoreInfo);
         $(coinCard).append(infoOfCoin);
-    
+
 
         $("#coins").append(coinCard);
     }
@@ -114,7 +114,7 @@ function printCoins(data) {
 //---------------------------------------------------------------------------------------------------//
 
 function addDetails(id, data) {
-   $(`#loading${id}`).show();
+    $(`#loading${id}`).show();
     $(`#moreInfo${id}`).html("");
 
     var coinImg = $(`<div ><img src=${data.image.small}</div>`)
@@ -370,23 +370,37 @@ function getCoins() {
 
 function getDetailsOfCoin(id) {
 
-    $.ajax({
+    if (localStorage.getItem(`coinInfo_${id}`) == undefined) {
 
-        url: `https://api.coingecko.com/api/v3/coins/${id}`,
-        type: "GET",
-        data: {},
-        success: function (data, statusText, xhr) {
-            console.log("DetailsOfCoin API status code: " + xhr.status)
-            console.log(data);
-            addDetails(id, data);
+        $.ajax({
 
-        },
-        error: function (xhr) {
-            console.log("DetailsOfCoin API status code: " + xhr.status)
+            url: `https://api.coingecko.com/api/v3/coins/${id}`,
+            type: "GET",
+            data: {},
+            success: function (data, statusText, xhr) {
+                console.log("DetailsOfCoin API status code: " + xhr.status)
+                console.log(data);
+                localStorage.setItem(`coinInfo_${id}`, JSON.stringify(data));
+                addDetails(id, data);
+
+            },
+            error: function (xhr) {
+                console.log("DetailsOfCoin API status code: " + xhr.status)
 
 
-        }
-    });
+            }
+
+
+        });
+    }
+    else {
+        var coinInfo = localStorage.getItem(`coinInfo_${id}`);
+        var coinInfo = JSON.parse(coinInfo);
+        addDetails(id, coinInfo);
+    }
+    setTimeout(function() { localStorage.removeItem(`coinInfo_${id}`); }, (60 * 2 * 1000));
+
+    
 }
 
 //---------------------------------------------------------------------------------------------------//
