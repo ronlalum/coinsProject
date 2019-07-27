@@ -86,13 +86,16 @@ function printCoins(data) {
     $("#coins").html("");
 
     for (var i = 0; i <= 99; i++) {
-        
+
         let coinCard = $(`<div class='col-md-4 card' id=coin${data[i].id}></div>`);
         let coinSymbol = $(`<div></div>`);
         let coinName = $(`<div></div>`);
-        let toggleSelect = $(`<label class="switch"> <input type="checkbox" id ="${data[i].symbol}"> <span class="slider round"></span></label>`)
+        let toggleSelect = $(`<label class="switch"> <input type="checkbox" id ="${data[i].symbol}"> <span class="slider round"></span></label>`);
         let buttonMoreInfo = $(`<button onclick="getDetailsOfCoin('${data[i].id}')" class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="moreInfo${data[i].id}" data-target="#moreInfo${data[i].id}" type="button" >More Info</button>`);
-        let infoOfCoin = $(`<div class="collapse card-body" id="moreInfo${data[i].id}"></div>`)
+        let infoOfCoin = $(`<div class="collapse card-body" id="moreInfo${data[i].id}"><img id="loading${data[i].id}" src = "img/4DWH.gif"></div>`);
+
+
+        $(`#loading${data[i].id}`).hide();
 
         $(coinSymbol).text(data[i].symbol)
         $(coinName).text(data[i].name);
@@ -101,6 +104,7 @@ function printCoins(data) {
         $(coinCard).append(toggleSelect);
         $(coinCard).append(buttonMoreInfo);
         $(coinCard).append(infoOfCoin);
+    
 
         $("#coins").append(coinCard);
     }
@@ -110,7 +114,7 @@ function printCoins(data) {
 //---------------------------------------------------------------------------------------------------//
 
 function addDetails(id, data) {
-
+   $(`#loading${id}`).show();
     $(`#moreInfo${id}`).html("");
 
     var coinImg = $(`<div ><img src=${data.image.small}</div>`)
@@ -122,7 +126,7 @@ function addDetails(id, data) {
     $(`#moreInfo${id}`).append(currentPriceUsd);
     $(`#moreInfo${id}`).append(currentPriceEur);
     $(`#moreInfo${id}`).append(currentPriceIls);
-
+    $(`#loading${id}`).hide();
 }
 
 //---------------------------------------------------------------------------------------------------//
