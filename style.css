@@ -1,5 +1,25 @@
 .card {
     float: left;
+    padding: 0px;
+}
+
+.my-btn {
+    width: 100px;
+    padding: 5px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.notFound {
+    margin: 50px;
+    text-align: center;
+    font-size: 36px;
+}
+
+.about {
+    margin: 50px;
+    text-align: center;
+    font-size: 24px;
 }
 
 .switch {
@@ -7,8 +27,41 @@
     display: inline-block;
     width: 30px;
     height: 17px;
+    margin-left: 20px;
+}
+.container-fluid {
+    padding: 0%;
+
+
+}
+.row {
+    margin: 0%;
+    padding: 0%;
+}
+.banner {
+    width: 100%;
+    height: 150px;
+    position: relative;
 }
 
+.myPhoto {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    z-index: -1;
+}
+.myTitle{
+    z-index: 1;
+    position: absolute;
+    font-size: 72px;
+    color: white;
+    text-shadow: 3px 2px black;
+    
+    margin-top: 20px;
+
+
+}
 /* Hide default HTML checkbox */
 
 .switch input {
@@ -84,7 +137,7 @@ input:checked+.slider:before {
     top: 50%;
     left: 50%;
     width: 400px;
-    height: 500px;
+    height: 300px;
     margin-top: -250px;
     margin-left: -200px;
     box-shadow: 3px 3px 5px;
@@ -92,4 +145,18 @@ input:checked+.slider:before {
     padding: 20px;
     z-index: 200;
     background-color: #fff;
+}
+
+.popUpBtn {
+
+    display: table; 
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.option{
+    overflow: auto;
+    padding: 5px;
+}
+.status {
+    float: right;
 }

@@ -88,10 +88,10 @@ function printCoins(data) {
     for (var i = 0; i <= 99; i++) {
 
         let coinCard = $(`<div class='col-md-4 card' id=coin${data[i].id}></div>`);
-        let coinSymbol = $(`<div></div>`);
-        let coinName = $(`<div></div>`);
-        let toggleSelect = $(`<label class="switch"> <input type="checkbox" id ="${data[i].symbol}"> <span class="slider round"></span></label>`);
-        let buttonMoreInfo = $(`<button onclick="getDetailsOfCoin('${data[i].id}')" class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="moreInfo${data[i].id}" data-target="#moreInfo${data[i].id}" type="button" >More Info</button>`);
+        let coinSymbol = $(`<div class="card-header"></div>`);
+        let coinName = $(`<div class="card-body "></div>`);
+        let toggleSelect = $(` <label class="switch "> <input type="checkbox" id ="${data[i].symbol}"> <span class="slider round "></span></label>`);
+        let buttonMoreInfo = $(`<button onclick="getDetailsOfCoin('${data[i].id}')" class="btn btn-primary my-btn " data-toggle="collapse" aria-expanded="false" aria-controls="moreInfo${data[i].id}" data-target="#moreInfo${data[i].id}" type="button" >More Info</button>`);
         let infoOfCoin = $(`<div class="collapse card-body" id="moreInfo${data[i].id}"><img id="loading${data[i].id}" src = "img/4DWH.gif"></div>`);
 
 
@@ -145,10 +145,10 @@ function searchCoin() {
                 if (data[i].symbol === searchText) {
 
                     let coinCard = $(`<div class='col-md-4 card' id=coin${data[i].id}></div>`);
-                    let coinSymbol = $(`<div></div>`);
-                    let coinName = $(`<div></div>`);
+                    let coinSymbol = $(`<div class="card-header"></div>`);
+                    let coinName = $(`<div class="card-body "></div>`);
                     let toggleSelect = $(`<label class="switch"> <input type="checkbox" id ="${data[i].symbol}"> <span class="slider round"></span></label>`)
-                    let buttonMoreInfo = $(`<button onclick="getDetailsOfCoin('${data[i].id}')" class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="moreInfo${data[i].id}" data-target="#moreInfo${data[i].id}" type="button" >More Info</button>`);
+                    let buttonMoreInfo = $(`<button onclick="getDetailsOfCoin('${data[i].id}')" class="btn btn-primary my-btn" data-toggle="collapse" aria-expanded="false" aria-controls="moreInfo${data[i].id}" data-target="#moreInfo${data[i].id}" type="button" >More Info</button>`);
                     let infoOfCoin = $(`<div class="collapse card-body" id="moreInfo${data[i].id}"></div>`)
 
                     $(coinSymbol).text(data[i].symbol)
@@ -165,7 +165,9 @@ function searchCoin() {
                 selectedCoinsUpdate(selectedCoins);
             }
             if (c == 0) {
-                $("#coins").text(searchText + " not found!");
+                let notFound = $(`<div class="col-md-12 notFound"></div>`);
+                $(notFound).text(searchText + " not found!");
+                $("#coins").append(notFound);
             }
         },
         error: function (xhr) {
@@ -178,14 +180,15 @@ function searchCoin() {
 
 function printAbout() {
     $("#coins").html("");
-    let about = $(`<div class='col-md-12'></div>`);
+    let about = $(`<div class='col-md-12 about'></div>`);
 
-    let myName = $(`<div></div>`);
+    let myName = $(`<div class="about"></div>`);
     let myProject = $(`<div></div>`);
     let myPic = $(`<div></div>`);
 
-    $(myProject).text("this project dsdsds dsdsds h hghfghfg hfghfg")
-    $(myName).html("<h1>Ron Lalum</h1> <br></br><h3>052-4893052</h3><br></br><h3>ron.lalum@Gmail.com</h3>");
+    $(myProject).text("this project display information of virtual coins from server and compare their value")
+    $(myName).html("Ron Lalum <br>052-4893052<br>ron.lalum@Gmail.com");
+    $(myPic).html(`<img src="https://media.licdn.com/dms/image/C4D03AQFngnLK7wspEg/profile-displayphoto-shrink_200_200/0?e=1569456000&v=beta&t=mjfHYqxLZ6UHg3EhMhzkj99HUO_39u7hxdi362nNjfo">`);
 
     $(about).append(myProject);
     $(about).append(myName);
@@ -263,11 +266,11 @@ function printPopUp(id2) {
 
     let title = $(`<div></div>`);
     let options = $(`<div></div>`);
-    let btn = $(`<div class="btn btn-danger" onclick="closePop('${id2}')">Cancel</div>`);
+    let btn = $(`<div class="btn btn-danger popUpBtn" onclick="closePop('${id2}')">Cancel</div>`);
 
     for (let i = 0; i < selectedCoins.length; i++) {
-        let option = $(`<div></div>`);
-        let status = $(`<div></div>`);
+        let option = $(`<div class="option" ></div>`);
+        let status = $(`<div class="status" ></div>`);
         $(option).text(selectedCoins[i]);
         $(status).html(`<label class="switch"> <input type="checkbox" id ="${selectedCoins[i]} " checked onclick="coinUnSelectpopUp('${selectedCoins[i]}' , '${id2}')
         "> <span class="slider round"></span></label>`);
@@ -275,7 +278,7 @@ function printPopUp(id2) {
         $(options).append(option);
     }
 
-    $(title).text("please cancel one")
+    $(title).text("you can choose 5 coins max. please cancel one")
 
     $(info).append(title);
     $(info).append(options);
